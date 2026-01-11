@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VICONSYS | High‑Rise Wall Innovation</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Refined Color Palette */
+      --primary: #0f172a;       /* Deep Slate */
+      --accent: #0284c7;        /* Vibrant Blue */
+      --accent-light: #e0f2fe;  /* Light Blue bg */
+      --text-main: #334155;
+      --text-light: #64748b;
+      --white: #ffffff;
+      --glass-border: rgba(255, 255, 255, 0.3);
+      --glass-bg: rgba(255, 255, 255, 0.7);
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      color: var(--text-main);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* --- Scroll Animations --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+    }
+    
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- Header / Hero --- */
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: var(--white);
+      padding: 120px 10% 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Abstract decorative circle */
+    header::before {
+      content: "";
+      position: absolute;
+      top: -150px;
+      right: -150px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(2, 132, 199, 0.4), transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-label {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 14px;
+      color: #38bdf8;
+      font-weight: 600;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(40px, 5vw, 64px);
+      line-height: 1.1;
+      margin-bottom: 25px;
+      color: var(--white);
+    }
+
+    .hero-content p {
+      font-size: 18px;
+      max-width: 700px;
+      opacity: 0.9;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    /* --- Sections --- */
+    section { padding: 100px 10%; }
+
+    .section-header {
+      margin-bottom: 60px;
+      max-width: 800px;
+    }
+
+    .section-title {
+      font-size: 36px;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: var(--accent);
+      margin-top: 10px;
+      border-radius: 2px;
+    }
+
+    .section-desc {
+      font-size: 18px;
+      color: var(--text-light);
+    }
+
+    /* --- Feature Cards (Glassmorphism) --- */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.05);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+    }
+
+    .card.blue-bg {
+      background: linear-gradient(145deg, var(--accent), #0369a1);
+      color: white;
+    }
+
+    .card.blue-bg h3, .card.blue-bg p { color: white; }
+    .card.blue-bg li { border-bottom: 1px solid rgba(255,255,255,0.2); }
+
+    .card h3 { font-size: 28px; margin-bottom: 15px; }
+    
+    .card ul { list-style: none; margin-top: 20px; }
+    .card li {
+      padding: 12px 0;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+    }
+    .card li::before {
+      content: "✓";
+      margin-right: 10px;
+      color: var(--accent);
+      font-weight: bold;
+    }
+    .card.blue-bg li::before { color: #fff; }
+
+    /* --- Carousel (Improved) --- */
+    .carousel-container {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      background: #000;
+      aspect-ratio: 16/9;
+      max-height: 600px;
+      object-fit: cover;
+    }
+
+    .carousel-track {
+      display: flex;
+      height: 100%;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Caption on top of image */
+    .slide-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 40px 30px 20px;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      color: white;
+      opacity: 0; 
+      transform: translateY(20px);
+      transition: 0.5s ease 0.3s;
+    }
+
+    .carousel-slide.active .slide-caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Controls */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.4);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      z-index: 10;
+    }
+    
+    .carousel-btn:hover { background: white; color: var(--accent); }
+    .carousel-btn.prev { left: 20px; }
+    .carousel-btn.next { right: 20px; }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+
+    .carousel-dot {
+      width: 30px;
+      height: 4px;
+      background: rgba(255,255,255,0.4);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .carousel-dot.active { background: white; width: 50px; }
+
+    /* --- Footer --- */
+    footer {
+      background: var(--primary);
+      color: var(--text-light);
+      padding: 60px 10%;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    footer p { font-size: 14px; }
+    footer strong { color: white; }
+
+    /* =========================================
+       PDF / PRINT OPTIMISATION
+       ========================================= */
+    @media print {
+      body { background: white; color: black; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      header { background: #fff !important; color: #000; padding: 20px 0; border-bottom: 2px solid #000; }
+      header::before { display: none; }
+      .hero-content h1 { color: #000; font-size: 32px; }
+      .hero-content p { color: #333; }
+      section { padding: 40px 0; page-break-inside: avoid; }
+      
+      .card { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
+      .card.blue-bg { background: #fff !important; color: #000 !important; border: 2px solid #000; }
+      .card.blue-bg h3, .card.blue-bg p, .card.blue-bg li { color: #000 !important; }
+      .card li { border-color: #ddd; }
+      .card.blue-bg li::before { color: #000; }
+
+      .carousel-container {
+        overflow: visible;
+        max-height: none;
+        aspect-ratio: auto;
+        box-shadow: none;
+        background: none;
+      }
+      .carousel-track {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        transform: none !important;
+      }
+      .carousel-slide {
+        display: block !important;
+        width: auto !important;
+        height: auto !important;
+        page-break-inside: avoid;
+        margin-bottom: 20px;
+      }
+      .carousel-slide img {
+        height: 250px;
+        object-fit: contain;
+        border: 1px solid #eee;
+      }
+      .slide-caption {
+        position: relative;
+        background: none;
+        color: #000;
+        opacity: 1 !important;
+        transform: none !important;
+        padding: 5px 0;
+        font-size: 12px;
+      }
+      .carousel-btn, .carousel-dots { display: none !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="hero-content reveal">
+    <span class="hero-label">Construction Technology</span>
+    <h1>Revolutionising Wall &<br>Structural Construction</h1>
+    <p>
+      VICONSYS introduces an advanced construction system enabling walls and
+      structural elements to be cast up to any height in a single continuous pour —
+      delivering unmatched strength, speed, and precision.
+    </p>
+  </div>
+</header>
+
+<section>
+  <div class="section-header reveal">
+    <h2 class="section-title">The Innovation</h2>
+    <p class="section-desc">
+      Traditional wall construction requires multiple lifts, joints, and repeated
+      shuttering cycles. VICONSYS overcomes these limitations through engineered
+      formwork and monolithic casting.
+    </p>
+  </div>
+
+  <div class="features-grid">
+    <div class="card reveal">
+      <h3>Proven on Site</h3>
+      <p style="margin-bottom: 20px;">
+        A <strong>24‑foot‑high RCC wall</strong> successfully cast in a single pour at
+        the <strong>District Jail, Ahilyanagar</strong>.
+      </p>
+      <p style="font-size: 15px; color: var(--text-light);">
+        The execution achieved excellent surface finish, vertical accuracy, and monolithic 
+        structural performance — validating the system under real site conditions.
+      </p>
+    </div>
+
+    <div class="card blue-bg reveal" style="transition-delay: 0.2s;">
+      <h3>Key Advantages</h3>
+      <ul>
+        <li>No cold joints (Monolithic structure)</li>
+        <li>Faster cycle time (Single pour)</li>
+        <li>Superior strength & durability</li>
+        <li>Reduced labour & handling</li>
+        <li>Ideal for Industrial & Infrastructure</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-header reveal">
+    <h2 class="section-title">Project Gallery</h2>
+    <p class="section-desc">
+      Site execution at District Jail, Ahilyanagar.
+    </p>
+  </div>
+
+  <div class="carousel-container reveal">
+  <div class="carousel-track" id="track">
+
+    <div class="carousel-slide active">
+      <img src="images/PHOTO-2025-09-13-20-02-16.jpg" alt="Construction Site 1">
+    </div>
+
+    <div class="carousel-slide">
+      <img src="images/PHOTO-2025-09-26-09-51-29.jpg" alt="Construction Site 2">
+    </div>
+
+    <div class="carousel-slide">
+      <img src="images/PHOTO-2026-01-10-10-06-04-2.jpg" alt="Construction Site 3">
+    </div>
+
+    <div class="carousel-slide">
+      <img src="images/PHOTO-2026-01-10-10-06-04-3.jpg" alt="Construction Site 4">
+    </div>
+
+    <div class="carousel-slide">
+      <img src="images/PHOTO-2026-01-10-10-06-04.jpg" alt="Construction Site 5">
+    </div>
+
+  </div>
+
+  <button class="carousel-btn prev" id="prevBtn">‹</button>
+  <button class="carousel-btn next" id="nextBtn">›</button>
+
+  <div class="carousel-dots" id="dotsContainer"></div>
+</div>
+
+</section>
+
+<footer>
+  <p>© 2026 <strong>VICONSYS</strong> | High‑Rise Wall Construction Innovation</p>
+</footer>
+
+<script>
+  // --- Scroll Reveal Animation ---
+  const revealElements = document.querySelectorAll('.reveal');
+
+  const revealOnScroll = () => {
+    const windowHeight = window.innerHeight;
+    const elementVisible = 100;
+
+    revealElements.forEach((reveal) => {
+      const elementTop = reveal.getBoundingClientRect().top;
+      if (elementTop < windowHeight - elementVisible) {
+        reveal.classList.add('active');
+      }
+    });
+  };
+
+  window.addEventListener('scroll', revealOnScroll);
+  revealOnScroll(); // Trigger once on load
+
+  // --- Carousel Logic ---
+  const track = document.getElementById('track');
+  const slides = Array.from(track.children);
+  const nextBtn = document.getElementById('nextBtn');
+  const prevBtn = document.getElementById('prevBtn');
+  const dotsContainer = document.getElementById('dotsContainer');
+  let currentIndex = 0;
+  let autoSlideInterval;
+
+  // Setup Dots
+  slides.forEach((_, idx) => {
+    const dot = document.createElement('div');
+    dot.classList.add('carousel-dot');
+    if (idx === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => moveToSlide(idx));
+    dotsContainer.appendChild(dot);
+  });
+  const dots = Array.from(dotsContainer.children);
+
+  const updateSlidePosition = () => {
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    
+    // Update active classes
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[currentIndex].classList.add('active');
+
+    // Update dots
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[currentIndex].classList.add('active');
+  };
+
+  const moveToSlide = (targetIndex) => {
+    currentIndex = targetIndex;
+    if (currentIndex < 0) currentIndex = slides.length - 1;
+    if (currentIndex >= slides.length) currentIndex = 0;
+    
+    updateSlidePosition();
+    resetTimer();
+  };
+
+  // Event Listeners
+  nextBtn.addEventListener('click', () => moveToSlide(currentIndex + 1));
+  prevBtn.addEventListener('click', () => moveToSlide(currentIndex - 1));
+
+  // Auto Play
+  const startTimer = () => {
+    autoSlideInterval = setInterval(() => moveToSlide(currentIndex + 1), 4000);
+  };
+  
+  const resetTimer = () => {
+    clearInterval(autoSlideInterval);
+    startTimer();
+  };
+
+  // Touch / Swipe Support
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  track.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+    clearInterval(autoSlideInterval);
+  });
+
+  track.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+    startTimer();
+  });
+
+  const handleSwipe = () => {
+    if (touchEndX < touchStartX - 50) moveToSlide(currentIndex + 1);
+    if (touchEndX > touchStartX + 50) moveToSlide(currentIndex - 1);
+  };
+
+  // Init
+  startTimer();
+</script>
+
+</body>
+</html>
