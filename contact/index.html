@@ -10,243 +10,167 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --primary: #0f172a;
-      --accent: #0284c7;
-      --text-main: #334155;
-      --text-light: #64748b;
-      --white: #ffffff;
-      --shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-    }
+    :root { --primary:#0f172a; --accent:#0284c7; --text-main:#334155; --text-light:#64748b; --white:#fff; --shadow:0 20px 40px rgba(0,0,0,0.08); }
+    *{ margin:0; padding:0; box-sizing:border-box; }
+    body{ font-family:'Inter',sans-serif; background:#f8fafc; color:var(--text-main); line-height:1.7; overflow-x:hidden; }
+    h1,h2,h3{ font-family:'Manrope',sans-serif; font-weight:700; color:var(--primary); }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* NAV */
+    .navbar{ position:fixed; top:0; width:100%; z-index:1100; background: rgba(15,23,42,0.75); backdrop-filter: blur(12px); border-bottom:1px solid rgba(255,255,255,0.08); transition: background .3s, box-shadow .3s; }
+    .navbar.scrolled { background: rgba(15,23,42,0.9); box-shadow:0 10px 30px rgba(0,0,0,0.25); }
+    .nav-container{ max-width:1400px; margin:auto; padding:18px 10%; display:flex; align-items:center; justify-content:space-between; }
+    .nav-logo{ font-family:'Manrope',sans-serif; font-size:20px; font-weight:800; color:#fff; text-decoration:none; }
+    .nav-links{ display:flex; gap:32px; }
+    .nav-links a{ color:#cbd5f5; font-size:15px; font-weight:500; text-decoration:none; position:relative; }
+    .nav-links a:hover{ color:#fff; }
+    .nav-links a::after{ content:""; position:absolute; bottom:-6px; left:0; width:0; height:2px; background:var(--accent); transition:width .3s; }
+    .nav-links a:hover::after{ width:100%; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f8fafc;
-      color: var(--text-main);
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
+    .nav-toggle{ display:none; flex-direction:column; gap:6px; cursor:pointer; width:36px; height:24px; justify-content:center; align-items:center; border:0; background:none; }
+    .nav-toggle span{ width:26px; height:2px; background:#fff; transition:transform .28s ease, opacity .28s ease; display:block; }
+    .nav-toggle.open span:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2){ opacity:0; }
+    .nav-toggle.open span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
 
-    h1, h2, h3 {
-      font-family: 'Manrope', sans-serif;
-      font-weight: 700;
-      color: var(--primary);
-    }
+    .mobile-menu{ position:fixed; inset:0; background:rgba(15,23,42,0.97); backdrop-filter: blur(20px); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:28px; transform:translateY(-100%); transition:transform .4s cubic-bezier(.4,0,.2,1); z-index:1090; padding:60px 20px; }
+    .mobile-menu.active{ transform:translateY(0); }
+    .mobile-menu a{ font-family:'Manrope',sans-serif; font-size:24px; font-weight:600; color:#fff; text-decoration:none; }
+    .mobile-menu a:hover{ color:var(--accent); }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-    }
+    body.no-scroll{ overflow:hidden; }
+    @media (max-width:900px){ .nav-links{ display:none; } .nav-toggle{ display:flex; } }
 
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    /* Contact layout */
+    header{ background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%); color:white; padding:120px 10% 100px; position:relative; overflow:hidden; }
+    header::before{ content:""; position:absolute; top:-150px; right:-150px; width:600px; height:600px; background: radial-gradient(circle, rgba(2,132,199,0.4), transparent 70%); border-radius:50%; }
+    .hero-content{ max-width:900px; position:relative; z-index:2; }
+    .hero-label{ text-transform:uppercase; letter-spacing:2px; font-size:14px; color:#38bdf8; font-weight:600; margin-bottom:15px; display:block; }
+    .hero-content h1{ font-size: clamp(40px,5vw,64px); line-height:1.1; margin-bottom:25px; color:white; }
+    .hero-content p{ font-size:18px; max-width:720px; opacity:0.9; font-weight:300; }
 
-    header {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      color: white;
-      padding: 120px 10% 100px;
-      position: relative;
-      overflow: hidden;
-    }
+    .reveal{ opacity:0; transform:translateY(30px); transition: all .8s cubic-bezier(.5,0,0,1); }
+    .reveal.active{ opacity:1; transform:translateY(0); }
 
-    header::before {
-      content: "";
-      position: absolute;
-      top: -150px;
-      right: -150px;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(2,132,199,0.4), transparent 70%);
-      border-radius: 50%;
-    }
+    section{ padding:100px 10%; }
+    .section-header{ max-width:800px; margin-bottom:60px; }
+    .section-title{ font-size:36px; margin-bottom:20px; display:inline-block; }
+    .section-title::after{ content:''; display:block; width:60px; height:4px; background:var(--accent); margin-top:10px; border-radius:2px; }
+    .section-desc{ font-size:18px; color:var(--text-light); }
 
-    .hero-content {
-      max-width: 900px;
-      position: relative;
-      z-index: 2;
-    }
+    .contact-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:30px; }
+    .card{ background:white; border-radius:24px; padding:40px; box-shadow:var(--shadow); transition:transform .3s ease, box-shadow .3s ease; }
+    .card:hover{ transform:translateY(-5px); box-shadow:0 30px 60px rgba(0,0,0,0.12); }
+    .card h3{ font-size:26px; margin-bottom:15px; }
+    .contact-item{ font-size:17px; margin-bottom:12px; }
+    .contact-item strong{ display:block; color:var(--primary); margin-bottom:4px; }
+    .contact-item a{ color:var(--accent); text-decoration:none; font-weight:500; }
+    .contact-item a:hover{ text-decoration:underline; }
 
-    .hero-label {
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 14px;
-      color: #38bdf8;
-      font-weight: 600;
-      margin-bottom: 15px;
-      display: block;
-    }
-
-    .hero-content h1 {
-      font-size: clamp(40px, 5vw, 64px);
-      line-height: 1.1;
-      margin-bottom: 25px;
-      color: white;
-    }
-
-    .hero-content p {
-      font-size: 18px;
-      max-width: 720px;
-      opacity: 0.9;
-      font-weight: 300;
-    }
-
-    section { padding: 100px 10%; }
-
-    .section-header {
-      max-width: 800px;
-      margin-bottom: 60px;
-    }
-
-    .section-title {
-      font-size: 36px;
-      margin-bottom: 20px;
-      display: inline-block;
-    }
-
-    .section-title::after {
-      content: '';
-      display: block;
-      width: 60px;
-      height: 4px;
-      background: var(--accent);
-      margin-top: 10px;
-      border-radius: 2px;
-    }
-
-    .section-desc {
-      font-size: 18px;
-      color: var(--text-light);
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 24px;
-      padding: 40px;
-      box-shadow: var(--shadow);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.12);
-    }
-
-    .card h3 {
-      font-size: 26px;
-      margin-bottom: 15px;
-    }
-
-    .contact-item {
-      font-size: 17px;
-      margin-bottom: 12px;
-    }
-
-    .contact-item strong {
-      display: block;
-      color: var(--primary);
-      margin-bottom: 4px;
-    }
-
-    .contact-item a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .contact-item a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      background: var(--primary);
-      color: var(--text-light);
-      padding: 60px 10%;
-      text-align: center;
-    }
-
-    footer strong { color: white; }
+    footer{ background:var(--primary); color:var(--text-light); padding:60px 10%; text-align:center; }
+    footer strong{ color:white; }
   </style>
 </head>
-
 <body>
+  <!-- NAV -->
+  <nav class="navbar" role="navigation" aria-label="Main">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">VICONSYS</a>
 
-<header>
-  <div class="hero-content reveal">
-    <span class="hero-label">Contact</span>
-    <h1>Let’s Discuss Your<br>Construction Challenge</h1>
-    <p>
-      Reach out to VICONSYS to explore how our monolithic construction systems
-      can add speed, strength, and efficiency to your next project.
-    </p>
-  </div>
-</header>
-
-<section>
-  <div class="section-header reveal">
-    <h2 class="section-title">Get in Touch</h2>
-    <p class="section-desc">
-      For technical discussions, project enquiries, or collaboration opportunities,
-      connect with us using the details below.
-    </p>
-  </div>
-
-  <div class="contact-grid">
-    <div class="card reveal">
-      <h3>Contact Details</h3>
-
-      <div class="contact-item">
-        <strong>Email</strong>
-        <a href="mailto:desk.viconsys@gmail.com">desk.viconsys@gmail.com</a>
+      <div class="nav-links" role="menubar">
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <a href="/viconsys/">Technology</a>
+        <a href="/gallery/">Projects</a>
+        <a href="/contact/">Contact</a>
       </div>
 
-      <div class="contact-item">
-        <strong>Phone</strong>
-        <a href="tel:904965111">+91 904965111</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="/">Home</a>
+    <a href="/about/">About</a>
+    <a href="/viconsys/">Technology</a>
+    <a href="/gallery/">Projects</a>
+    <a href="/contact/">Contact</a>
+  </div>
+
+  <header>
+    <div class="hero-content reveal">
+      <span class="hero-label">Contact</span>
+      <h1>Let’s Discuss Your<br>Construction Challenge</h1>
+      <p>Reach out to VICONSYS to explore how our monolithic construction systems can add speed, strength, and efficiency to your next project.</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="section-header reveal">
+      <h2 class="section-title">Get in Touch</h2>
+      <p class="section-desc">For technical discussions, project enquiries, or collaboration opportunities, connect with us using the details below.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="card reveal">
+        <h3>Contact Details</h3>
+
+        <div class="contact-item">
+          <strong>Email</strong>
+          <a href="mailto:desk.viconsys@gmail.com">desk.viconsys@gmail.com</a>
+        </div>
+
+        <div class="contact-item">
+          <strong>Phone</strong>
+          <a href="tel:+91904965111">+91 904965111</a>
+        </div>
+      </div>
+
+      <div class="card reveal" style="transition-delay:0.15s">
+        <h3>Office Address</h3>
+        <p style="color: var(--text-light); font-size: 17px;">
+          VICONSYS Engineering Office<br>
+          3rd Floor, Vertex Tech Park,<br>
+          Baner–Balewadi Road,<br>
+          Pune, Maharashtra – 411045<br>
+          India
+        </p>
       </div>
     </div>
+  </section>
 
-    <div class="card reveal" style="transition-delay:0.15s">
-      <h3>Office Address</h3>
-      <p style="color: var(--text-light); font-size: 17px;">
-        VICONSYS Engineering Office<br>
-        3rd Floor, Vertex Tech Park,<br>
-        Baner–Balewadi Road,<br>
-        Pune, Maharashtra – 411045<br>
-        India
-      </p>
-    </div>
-  </div>
-</section>
+  <footer>
+    <p>© 2026 <strong>VICONSYS</strong> | Engineering Monolithic Construction</p>
+  </footer>
 
-<footer>
-  <p>© 2026 <strong>VICONSYS</strong> | Engineering Monolithic Construction</p>
-</footer>
+  <script>
+    // NAV + MENU
+    const toggle = document.getElementById('navToggle');
+    const menu = document.getElementById('mobileMenu');
+    const navbar = document.querySelector('.navbar');
 
-<script>
-  const reveals = document.querySelectorAll('.reveal');
-  const revealOnScroll = () => {
-    const h = window.innerHeight;
-    reveals.forEach(el => {
-      if (el.getBoundingClientRect().top < h - 100) {
-        el.classList.add('active');
-      }
-    });
-  };
-  window.addEventListener('scroll', revealOnScroll);
-  revealOnScroll();
-</script>
+    const setMenuState = (isOpen) => {
+      toggle.classList.toggle('open', isOpen);
+      menu.classList.toggle('active', isOpen);
+      document.body.classList.toggle('no-scroll', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      menu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    };
 
+    toggle.addEventListener('click', () => setMenuState(!menu.classList.contains('active')));
+    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenuState(false)));
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu.classList.contains('active')) setMenuState(false); });
+    window.addEventListener('scroll', () => { if (window.scrollY > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled'); });
+
+    // Reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const revealOnScroll = () => {
+      const h = window.innerHeight;
+      reveals.forEach(el => { if (el.getBoundingClientRect().top < h - 100) el.classList.add('active'); });
+    };
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+  </script>
 </body>
 </html>
-
