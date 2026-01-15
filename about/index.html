@@ -1,1 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About VICONSYS | Engineering Monolithic Construction</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #0284c7;
+      --text-main: #334155;
+      --text-light: #64748b;
+      --white: #ffffff;
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      color: var(--text-main);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: white;
+      padding: 120px 10% 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: -150px;
+      right: -150px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(2,132,199,0.4), transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-label {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 14px;
+      color: #38bdf8;
+      font-weight: 600;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(40px, 5vw, 64px);
+      line-height: 1.1;
+      margin-bottom: 25px;
+      color: white;
+    }
+
+    .hero-content p {
+      font-size: 18px;
+      max-width: 720px;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    section { padding: 100px 10%; }
+
+    .section-header {
+      max-width: 800px;
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: 36px;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: var(--accent);
+      margin-top: 10px;
+      border-radius: 2px;
+    }
+
+    .section-desc {
+      font-size: 18px;
+      color: var(--text-light);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+    }
+
+    .card.blue-bg {
+      background: linear-gradient(145deg, var(--accent), #0369a1);
+      color: white;
+    }
+
+    .card.blue-bg h3,
+    .card.blue-bg p {
+      color: white;
+    }
+
+    .card h3 {
+      font-size: 26px;
+      margin-bottom: 15px;
+    }
+
+    footer {
+      background: var(--primary);
+      color: var(--text-light);
+      padding: 60px 10%;
+      text-align: center;
+    }
+
+    footer strong { color: white; }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="hero-content reveal">
+    <span class="hero-label">About the Company</span>
+    <h1>Engineering the Future of<br>Monolithic Construction</h1>
+    <p>
+      VICONSYS is a construction technology company focused on redefining how
+      reinforced concrete walls and structural elements are built — faster,
+      stronger, and without compromise.
+    </p>
+  </div>
+</header>
+
+<section>
+  <div class="section-header reveal">
+    <h2 class="section-title">Who We Are</h2>
+    <p class="section-desc">
+      VICONSYS was founded with a singular objective: to eliminate inefficiencies,
+      joints, and structural limitations inherent in conventional wall construction
+      systems.
+    </p>
+  </div>
+
+  <div class="features-grid">
+    <div class="card reveal">
+      <h3>Engineering-Driven</h3>
+      <p>
+        Our systems are developed through structural analysis, on-site validation,
+        and execution-focused design — not theoretical assumptions.
+      </p>
+    </div>
+
+    <div class="card reveal" style="transition-delay:0.15s">
+      <h3>Proven on Ground</h3>
+      <p>
+        VICONSYS has successfully enabled single-pour RCC wall construction up to
+        24 feet in height under real project conditions, delivering monolithic
+        structural integrity.
+      </p>
+    </div>
+
+    <div class="card reveal" style="transition-delay:0.3s">
+      <h3>Built for Scale</h3>
+      <p>
+        Our solutions are designed for industrial, infrastructure, and institutional
+        projects where speed, precision, and durability are non-negotiable.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-header reveal">
+    <h2 class="section-title">Our Vision</h2>
+    <p class="section-desc">
+      To establish a new benchmark in vertical and high-rise wall construction by
+      enabling truly monolithic structures — free from cold joints, delays, and
+      repetitive shuttering cycles.
+    </p>
+  </div>
+
+  <div class="features-grid">
+    <div class="card blue-bg reveal">
+      <h3>Why VICONSYS</h3>
+      <p>
+        We believe construction systems should adapt to engineering intent — not
+        force engineers to compromise design due to execution constraints.
+        VICONSYS bridges that gap.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 <strong>VICONSYS</strong> | Engineering Monolithic Construction</p>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const revealOnScroll = () => {
+    const h = window.innerHeight;
+    reveals.forEach(el => {
+      if (el.getBoundingClientRect().top < h - 100) {
+        el.classList.add('active');
+      }
+    });
+  };
+  window.addEventListener('scroll', revealOnScroll);
+  revealOnScroll();
+</script>
+
+</body>
+</html>
 
