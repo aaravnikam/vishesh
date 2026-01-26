@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects | VICONSYS</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary:#0f172a;
+      --accent:#0284c7;
+      --text-main:#334155;
+      --text-light:#64748b;
+      --white:#ffffff;
+      --shadow:0 20px 40px rgba(0,0,0,.08);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family:'Inter',sans-serif;
+      background:#f8fafc;
+      color:var(--text-main);
+      line-height:1.7;
+    }
+
+    /* NAV */
+    .navbar {
+      position:fixed;
+      top:0;
+      width:100%;
+      z-index:1000;
+      background:rgba(15,23,42,.85);
+      backdrop-filter:blur(12px);
+    }
+    .nav-container {
+      max-width:1400px;
+      margin:auto;
+      padding:18px 10%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .nav-logo {
+      font-family:'Manrope',sans-serif;
+      font-weight:800;
+      color:white;
+      text-decoration:none;
+      letter-spacing:1px;
+    }
+    .nav-links a {
+      color:#cbd5f5;
+      margin-left:28px;
+      text-decoration:none;
+      font-size:15px;
+    }
+    .nav-links a:hover { color:white; }
+
+    header { padding-top:180px; }
+
+    /* HERO */
+    header {
+      background:linear-gradient(135deg,#0f172a,#1e293b);
+      color:white;
+      padding:120px 10% 100px;
+    }
+    .hero-content { max-width:900px; }
+    .hero-label {
+      color:#38bdf8;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      font-size:14px;
+      margin-bottom:15px;
+      display:block;
+    }
+    header h1 {
+      font-family:'Manrope',sans-serif;
+      font-size:clamp(40px,5vw,64px);
+      margin-bottom:20px;
+    }
+    header p {
+      font-size:18px;
+      opacity:.9;
+      max-width:700px;
+    }
+
+    /* SECTIONS */
+    section { padding:100px 10%; }
+    .section-header { margin-bottom:50px; }
+    .section-title {
+      font-family:'Manrope',sans-serif;
+      font-size:36px;
+    }
+    .section-desc {
+      color:var(--text-light);
+      font-size:18px;
+      margin-top:10px;
+    }
+
+    /* PROJECT SECTION */
+    .project-section:not(:last-child) {
+      border-bottom:1px solid rgba(0,0,0,.06);
+    }
+
+    /* CAROUSEL */
+    .carousel-container {
+      position:relative;
+      border-radius:24px;
+      overflow:hidden;
+      background:black;
+      aspect-ratio:16/9;
+      box-shadow:0 25px 50px -12px rgba(0,0,0,.25);
+    }
+    .carousel-track {
+      display:flex;
+      height:100%;
+      transition:transform .6s cubic-bezier(.25,1,.5,1);
+    }
+    .carousel-slide {
+      min-width:100%;
+      height:100%;
+    }
+    .carousel-slide img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .carousel-btn {
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.4);
+      background:rgba(255,255,255,.2);
+      color:white;
+      font-size:24px;
+      cursor:pointer;
+    }
+    .carousel-btn.prev { left:20px; }
+    .carousel-btn.next { right:20px; }
+
+    .carousel-dots {
+      position:absolute;
+      bottom:20px;
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      gap:8px;
+    }
+    .carousel-dot {
+      width:30px;
+      height:4px;
+      background:rgba(255,255,255,.4);
+      border-radius:2px;
+      cursor:pointer;
+    }
+    .carousel-dot.active {
+      background:white;
+      width:50px;
+    }
+
+    footer {
+      background:var(--primary);
+      color:var(--text-light);
+      text-align:center;
+      padding:60px 10%;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/" class="nav-logo">VICONSYS</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/about/">About</a>
+      <a href="/viconsys/">Technology</a>
+      <a href="/projects/">Projects</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header>
+  <div class="hero-content">
+    <span class="hero-label">Our Work</span>
+    <h1>Projects & Site Executions</h1>
+    <p>Real-world applications of the VICONSYS construction system across
+      industrial and infrastructure projects.</p>
+  </div>
+</header>
+
+<!-- ===================== -->
+<!-- CLIENT PROJECT BLOCK -->
+<!-- COPY FROM HERE ↓↓↓ -->
+<section class="project-section">
+
+  <div class="section-header">
+    <h2 class="section-title">District Jail, Ahilyanagar</h2>
+    <p class="section-desc">
+      24-ft RCC wall cast in a single continuous pour using VICONSYS technology.
+    </p>
+  </div>
+
+  <div class="carousel-container" data-carousel>
+    <div class="carousel-track">
+      <div class="carousel-slide">
+        <img src="/aarav/images/PHOTO-2025-09-13-20-02-16.jpg">
+      </div>
+      <div class="carousel-slide">
+        <img src="/aarav/images/PHOTO-2025-09-26-09-51-29.jpg">
+      </div>
+      <div class="carousel-slide">
+        <img src="/aarav/images/PHOTO-2026-01-10-10-06-04.jpg">
+      </div>
+    </div>
+
+    <button class="carousel-btn prev">‹</button>
+    <button class="carousel-btn next">›</button>
+    <div class="carousel-dots"></div>
+  </div>
+
+</section>
+<!-- COPY UNTIL HERE ↑↑↑ -->
+
+<footer>
+  <p>© 2026 <strong>VICONSYS</strong></p>
+</footer>
+
+<script>
+  document.querySelectorAll('[data-carousel]').forEach(carousel => {
+    const track = carousel.querySelector('.carousel-track');
+    const slides = [...track.children];
+    const prev = carousel.querySelector('.prev');
+    const next = carousel.querySelector('.next');
+    const dotsWrap = carousel.querySelector('.carousel-dots');
+    let index = 0, timer;
+
+    slides.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      d.onclick = () => move(i);
+      dotsWrap.appendChild(d);
+    });
+    const dots = [...dotsWrap.children];
+
+    function update() {
+      track.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach(d => d.classList.remove('active'));
+      dots[index].classList.add('active');
+    }
+    function move(i) {
+      index = (i + slides.length) % slides.length;
+      update();
+      reset();
+    }
+    function start() {
+      timer = setInterval(() => move(index + 1), 4000);
+    }
+    function reset() {
+      clearInterval(timer);
+      start();
+    }
+
+    prev.onclick = () => move(index - 1);
+    next.onclick = () => move(index + 1);
+    start();
+  });
+</script>
+
+</body>
+</html>
